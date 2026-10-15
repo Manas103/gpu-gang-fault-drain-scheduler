@@ -1,0 +1,59 @@
+# Hand-written to document the schema internal/types.PodGroup mirrors; this
+# repo never registers it with a real kube-apiserver (see README "what this
+# is NOT"), so it was never run through controller-gen and there is no
+# generated DeepCopy or webhook config to go with it.
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: podgroups.scheduling.manas103.dev
+spec:
+  group: scheduling.manas103.dev
+  scope: Namespaced
+  names:
+    plural: podgroups
+    singular: podgroup
+    kind: PodGroup
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required: [minMember, queueName, durationTicks]
+              properties:
+                minMember:
+                  type: integer
+                  minimum: 1
+                  description: Total GPUs the gang needs, one per pod. All must be scheduled together or none are.
+                queueName:
+                  type: string
+                durationTicks:
+                  type: integer
+                  minimum: 1
+            status:
+              type: object
+              properties:
+                phase:
+                  type: string
+                  enum: [Pending, Partial, Running, Completed]
+                placedPods:
+                  type: integer
+                nodePods:
+                  type: object
+                  additionalProperties:
+                    type: integer
+                startTick:
+                  type: integer
+                requeueCount:
+                  type: integer
+      additionalPrinterColumns:
+        - name: Phase
+          type: string
+          jsonPath: .status.phase
+        - name: Placed
+          type: integer
+          jsonPath: .status.placedPods

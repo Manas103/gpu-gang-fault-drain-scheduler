@@ -1,0 +1,40 @@
+# See podgroups.yaml for why this is hand-written rather than generated.
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: queues.scheduling.manas103.dev
+spec:
+  group: scheduling.manas103.dev
+  scope: Cluster
+  names:
+    plural: queues
+    singular: queue
+    kind: Queue
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              required: [gpuQuota]
+              properties:
+                gpuQuota:
+                  type: integer
+                  minimum: 0
+                  description: Guaranteed GPUs. A queue may use more via over-quota reclaim of a sibling's currently idle quota; see README.
+            status:
+              type: object
+              properties:
+                gpuUsed:
+                  type: integer
+      additionalPrinterColumns:
+        - name: Quota
+          type: integer
+          jsonPath: .spec.gpuQuota
+        - name: Used
+          type: integer
+          jsonPath: .status.gpuUsed

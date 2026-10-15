@@ -1,0 +1,29 @@
+go run ./cmd/simulate
+trace: 2000 jobs, arrival window 8000 ticks, cluster 18x8=144 GPUs, 80 faults
+
+== gang scheduler + fault-drain controller ==
+  completed:            2000
+  whole-gang requeues:  256
+  deadlocked gangs:     0
+  pending at end:       0
+  partial at end:       0
+  running at end:       0
+  mean raw allocation:  77.72% (includes GPUs held by a stuck Partial gang, if any)
+  peak raw allocation:  100.00%
+  mean effective alloc: 77.72% (GPUs held by a fully-placed, Running gang only)
+  peak effective alloc: 100.00%
+  simulated ticks:      10998
+
+== first-fit baseline (no gang awareness) ==
+  completed:            1890
+  whole-gang requeues:  0
+  deadlocked gangs:     1
+  pending at end:       78
+  partial at end:       1
+  running at end:       31
+  mean raw allocation:  99.40% (includes GPUs held by a stuck Partial gang, if any)
+  peak raw allocation:  100.00%
+  mean effective alloc: 81.78% (GPUs held by a fully-placed, Running gang only)
+  peak effective alloc: 100.00%
+  simulated ticks:      10998
+BENCH_EXIT=0

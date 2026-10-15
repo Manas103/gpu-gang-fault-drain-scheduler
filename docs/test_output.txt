@@ -1,0 +1,65 @@
+go test -v -race ./...
+?   	github.com/Manas103/gpu-gang-fault-drain-scheduler/cmd/simulate	[no test files]
+=== RUN   TestGangSchedulerHoldsInvariantsAndNeverDeadlocksOnARandomTrace
+--- PASS: TestGangSchedulerHoldsInvariantsAndNeverDeadlocksOnARandomTrace (0.23s)
+=== RUN   TestFirstFitHoldsConservationButDoesDeadlockOnTheSameTrace
+--- PASS: TestFirstFitHoldsConservationButDoesDeadlockOnTheSameTrace (0.09s)
+=== RUN   TestQueueHierarchyNeverLetsAQueueExceedQuotaPlusIdleSiblings
+--- PASS: TestQueueHierarchyNeverLetsAQueueExceedQuotaPlusIdleSiblings (0.04s)
+PASS
+ok  	github.com/Manas103/gpu-gang-fault-drain-scheduler/internal/integration	1.391s
+=== RUN   TestHandlerServesPrometheusTextFormat
+--- PASS: TestHandlerServesPrometheusTextFormat (0.01s)
+PASS
+ok  	github.com/Manas103/gpu-gang-fault-drain-scheduler/internal/metricsserver	1.029s
+?   	github.com/Manas103/gpu-gang-fault-drain-scheduler/internal/oracle	[no test files]
+=== RUN   TestFirstFitLeavesAPartialGangHoldingResourcesForever
+--- PASS: TestFirstFitLeavesAPartialGangHoldingResourcesForever (0.00s)
+=== RUN   TestFirstFitSecondJobCanStillGetScrapsAheadOfAStuckFirstJob
+--- PASS: TestFirstFitSecondJobCanStillGetScrapsAheadOfAStuckFirstJob (0.00s)
+=== RUN   TestFirstFitFaultOnlyReleasesTheFaultedNodesShare
+--- PASS: TestFirstFitFaultOnlyReleasesTheFaultedNodesShare (0.00s)
+=== RUN   TestGangSchedulerNeverPartiallyAdmits
+--- PASS: TestGangSchedulerNeverPartiallyAdmits (0.00s)
+=== RUN   TestGangSchedulerAdmitsAtomicallyWhenItFits
+--- PASS: TestGangSchedulerAdmitsAtomicallyWhenItFits (0.00s)
+=== RUN   TestGangSchedulerOverQuotaReclaim
+--- PASS: TestGangSchedulerOverQuotaReclaim (0.00s)
+=== RUN   TestGangSchedulerOverQuotaBlockedWhenSiblingBusy
+--- PASS: TestGangSchedulerOverQuotaBlockedWhenSiblingBusy (0.00s)
+=== RUN   TestGangSchedulerFaultRequeuesWholeGangWithNoPartialWork
+--- PASS: TestGangSchedulerFaultRequeuesWholeGangWithNoPartialWork (0.00s)
+=== RUN   TestCanAdmitWithinOwnQuotaAlwaysAllowed
+--- PASS: TestCanAdmitWithinOwnQuotaAlwaysAllowed (0.00s)
+=== RUN   TestCanAdmitOverQuotaAllowedWhenSiblingIdle
+--- PASS: TestCanAdmitOverQuotaAllowedWhenSiblingIdle (0.00s)
+=== RUN   TestCanAdmitOverQuotaBlockedWhenNoSiblingIdle
+--- PASS: TestCanAdmitOverQuotaBlockedWhenNoSiblingIdle (0.00s)
+=== RUN   TestCanAdmitBlockedByClusterCapacityRegardlessOfQuota
+--- PASS: TestCanAdmitBlockedByClusterCapacityRegardlessOfQuota (0.00s)
+=== RUN   TestCanAdmitLenderPriorityIsNotBlockedByABorrower
+--- PASS: TestCanAdmitLenderPriorityIsNotBlockedByABorrower (0.00s)
+PASS
+ok  	github.com/Manas103/gpu-gang-fault-drain-scheduler/internal/scheduler	1.017s
+=== RUN   TestPlaceAndReleaseConserveCapacity
+--- PASS: TestPlaceAndReleaseConserveCapacity (0.00s)
+=== RUN   TestPlaceUnitsSpreadsAcrossNodesInIDOrder
+--- PASS: TestPlaceUnitsSpreadsAcrossNodesInIDOrder (0.00s)
+=== RUN   TestPlaceUnitsPanicsWithoutSufficientCapacity
+--- PASS: TestPlaceUnitsPanicsWithoutSufficientCapacity (0.00s)
+=== RUN   TestDrainExcludesNodeFromFreeTotalUntilRepaired
+--- PASS: TestDrainExcludesNodeFromFreeTotalUntilRepaired (0.00s)
+=== RUN   TestAllocatedPlusFreeEqualsCapacity
+--- PASS: TestAllocatedPlusFreeEqualsCapacity (0.00s)
+=== RUN   TestNewTraceIsDeterministic
+--- PASS: TestNewTraceIsDeterministic (0.01s)
+=== RUN   TestNewTraceDifferentSeedsDiffer
+--- PASS: TestNewTraceDifferentSeedsDiffer (0.00s)
+=== RUN   TestNewTraceArrivalsAreSorted
+--- PASS: TestNewTraceArrivalsAreSorted (0.01s)
+=== RUN   TestNewTraceGangSizesAreFromTheDeclaredBuckets
+--- PASS: TestNewTraceGangSizesAreFromTheDeclaredBuckets (0.02s)
+PASS
+ok  	github.com/Manas103/gpu-gang-fault-drain-scheduler/internal/sim	1.052s
+?   	github.com/Manas103/gpu-gang-fault-drain-scheduler/internal/types	[no test files]
+TEST_EXIT=0
